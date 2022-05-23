@@ -1,6 +1,7 @@
 public class FizzBuzz {
     public static void main(String[] args) {
         fizzBuzz(1000);
+        
     }
     
     public static void fizzBuzz(int num) {
@@ -14,6 +15,7 @@ public class FizzBuzz {
             else
                 System.out.println(i); // Not a multiple of 5 or 7
         }
+        
     }
     
 }

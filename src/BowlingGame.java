@@ -5,31 +5,40 @@ public class BowlingGame {
         Scanner scanner = new Scanner(System.in);
         
         BowlingGame bowlingGame = new BowlingGame();
-        System.out.println("Please enter number of pins knocked down:");
         int pinsScored;
         int round = 1;
-        int frame = 0;
+        int frame = 1;
+        int check10thFrame = 0;
         boolean finished = false;
         while (!finished) {
-            System.out.println("Please enter number of pins knocked down:");
+            System.out.println("Frame " + frame +":Please enter number of pins knocked down:");
             pinsScored = scanner.nextInt();
             if (frame < 10) {
                 if (pinsScored == 10) {
                     frame += 1;
                 } else {
                     bowlingGame.roll(pinsScored);
-                    System.out.println("Please enter number of pins knocked down:");
+                    System.out.println("Frame " + frame +":Please enter number of pins knocked down:");
                     pinsScored = scanner.nextInt();
-                    bowlingGame.roll(pinsScored);
                     frame += 1;
                 }
             } else if (frame >= 10) {
                 if (pinsScored == 10) {
-                    round += 2;
+                    frame += 1;
                 } else {
-                    round += 6;
+                    bowlingGame.roll(pinsScored);
+                    check10thFrame += pinsScored;
+                    System.out.println("Frame " + frame +":Please enter number of pins knocked down:");
+                    pinsScored = scanner.nextInt();
+                    check10thFrame += pinsScored;
+                    
+                    if (check10thFrame == 10) {
+                        bowlingGame.roll(pinsScored);
+                        System.out.println("Frame " + frame +":Please enter number of pins knocked down:");
+                    }
+                    frame += 3;
                 }
-                if (round >= 26) {
+                if (frame >= 13) {
                     finished = true;
                 }
             }
@@ -39,7 +48,7 @@ public class BowlingGame {
         System.out.println(bowlingGame.getScore());
     }
     
-    private int[] rolls = new int[21];
+    private int[] rolls = new int[30];
     private int currentRoll = 0;
     
     public void roll(int pins) {
@@ -53,13 +62,17 @@ public class BowlingGame {
         for (int frame = 0; frame < 10; frame++) {
             if (isStrike(frameIndex)) {
                 score += 10 + strikeBonus(frameIndex);
+//                frameIndex++;
                 frameIndex++;
+                System.out.println("Strike:" + score);
             } else if (isSpare(frameIndex)) {
                 score += 10 + spareBonus(frameIndex);
                 frameIndex += 2;
+                System.out.println("Spare:" +score);
             } else {
                 score += sumOfBowlsInFrame(frameIndex);
                 frameIndex += 2;
+                System.out.println("Normal:" +score);
             }
         }
         
