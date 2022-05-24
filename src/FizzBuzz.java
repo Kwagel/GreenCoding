@@ -1,6 +1,6 @@
 public class FizzBuzz {
     public static void main(String[] args) {
-        fizzBuzz(1000);
+        fizzBuzz(10000);
         
     }
     
