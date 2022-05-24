@@ -1,24 +1,22 @@
 public class FizzBuzz {
     public static void main(String[] args) {
         fizzBuzz(10000);
-        
     }
     
     public static void fizzBuzz(int num) {
-        int i = 0;
-        do {
-            i++;
+        StringBuilder sb = new StringBuilder();
+    
+        for (int i = 1; i <= num; i++) {
             if (((i % 5) == 0) && ((i % 7) == 0)) // Is it a multiple of 5 & 7?
-                System.out.println("fizzbuzz");
+                sb.append("fizzbuzz\n");
             else if ((i % 5) == 0) // Is it a multiple of 5?
-                System.out.println("fizz");
+                sb.append("fizz\n");
             else if ((i % 7) == 0) // Is it a multiple of 7?
-                System.out.println("buzz");
+                sb.append("buzz\n");
             else
-                System.out.println(i); // Not a multiple of 5 or 7
-        } while (i < num);
-        
-        
+                sb.append(i).append("\n"); // Not a multiple of 5 or 7
+        }
+        System.out.println(sb);
     }
     
 }
